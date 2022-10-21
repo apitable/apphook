@@ -1,5 +1,8 @@
 # apphook: Event-Driven Hook Engine 
 
+![npm](https://img.shields.io/npm/v/apphook)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mr-kelly/apphook/npm-publish.yaml)
+
 `apphook` is a way to implant/modify other piece of code.
 
 Computer software is a sort of sequence. We build software according to the business.
