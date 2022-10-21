@@ -1,0 +1,25 @@
+{
+  "name": "apphook",
+  "version": "1.0.0",
+  "description": "A way to implant/modify other piece of code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mr-kelly/apphook.git"
+  },
+  "keywords": [
+    "hook",
+    "plugin",
+    "event",
+    "subcribe"
+  ],
+  "author": "Kelly Peilin Chan <kelly@apitable.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mr-kelly/apphook/issues"
+  },
+  "homepage": "https://github.com/mr-kelly/apphook#readme"
+}
