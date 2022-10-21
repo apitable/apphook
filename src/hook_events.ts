@@ -1,9 +1,9 @@
 /*
  * appHook inside events set
  *
- * @Author: Kelly Peilin Chan (kelly@vikadata.com)
+ * @Author: Kelly Peilin Chan (kelly@apitable.com)
  * @Date: 2020-03-11 19:38:00
- * @Last Modified by: Kelly Peilin Chan (kelly@vikadata.com)
+ * @Last Modified by: Kelly Peilin Chan (kelly@apitable.com)
  * @Last Modified time: 2020-03-19 14:22:02
  */
 import { FilterCommand, TriggerCommand } from './commands';

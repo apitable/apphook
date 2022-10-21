@@ -1,9 +1,9 @@
 /*
  * AppHook Hook Engine
  *
- * @Author: Kelly Peilin Chan (kelly@vikadata.com)
+ * @Author: Kelly Peilin Chan (kelly@apitable.com)
  * @Date: 2020-03-07 11:15:05
- * @Last Modified by: Kelly Peilin Chan (kelly@vikadata.com)
+ * @Last Modified by: Kelly Peilin Chan (kelly@apitable.com)
  * @Last Modified time: 2020-03-21 18:25:48
  */
 import { FilterCommand, TriggerCommand } from './commands';
