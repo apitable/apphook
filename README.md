@@ -1,4 +1,4 @@
-# apphook: Event-Driven Hook Engine 
+# apphook: Event-Manager Hook Engine 
 
 [![npm](https://img.shields.io/npm/v/apphook)](https://www.npmjs.com/package/apphook)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mr-kelly/apphook/npm-publish)](https://github.com/mr-kelly/apphook/actions)
@@ -6,6 +6,8 @@
 [![npm](https://img.shields.io/npm/dm/apphook)](https://www.npmjs.com/package/apphook)
 
 `apphook` is a way to implant/modify other piece of code.
+
+It is a lightweight Event-Manager that inspired by [Wordpress Hooks](https://developer.wordpress.org/plugins/hooks/)
 
 Computer software is a sort of sequence. We build software according to the business.
 
