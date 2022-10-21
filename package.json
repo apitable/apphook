@@ -1,6 +1,6 @@
 {
   "name": "apphook",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A way to implant/modify other piece of code",
   "main": "./dist/index.js",
   "types": "./types/index.d.ts",
