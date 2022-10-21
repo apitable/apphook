@@ -7,7 +7,6 @@
   "types": "./types/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "publish": "npm run build && npm publish",
     "test": "jest --coverage tests"
   },
   "repository": {
