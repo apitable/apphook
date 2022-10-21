@@ -1,9 +1,9 @@
 # apphook: Event-Driven Hook Engine 
 
-![npm](https://img.shields.io/npm/v/apphook)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mr-kelly/apphook/npm-publish)
-![npm bundle size](https://img.shields.io/bundlephobia/min/apphook)
-![npm](https://img.shields.io/npm/dm/apphook)
+[![npm](https://img.shields.io/npm/v/apphook)](https://www.npmjs.com/package/apphook)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mr-kelly/apphook/npm-publish)](https://github.com/mr-kelly/apphook/actions)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/apphook)](https://www.npmjs.com/package/apphook)
+[![npm](https://img.shields.io/npm/dm/apphook)](https://www.npmjs.com/package/apphook)
 
 `apphook` is a way to implant/modify other piece of code.
 
