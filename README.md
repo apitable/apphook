@@ -1,7 +1,6 @@
-# apphook - Hook Engine 
+# apphook: Event-Driven Hook Engine 
 
-
-Hooks is a way to implant/modify other piece of code.
+`apphook` is a way to implant/modify other piece of code.
 
 Computer software is a sort of sequence. We build software according to the business.
 

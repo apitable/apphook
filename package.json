@@ -4,6 +4,7 @@
   "description": "A way to implant/modify other piece of code",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest --coverage"
   },
   "repository": {
