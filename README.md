@@ -20,7 +20,10 @@ That's why we should know `AppHook`.
 npm i --save apphook
 ```
 
-See [examples](#example) for more
+
+TypeScript types declarations (.d.ts) are ready.
+
+See [examples](#example) for usage examples.
 
 ## Principle
 

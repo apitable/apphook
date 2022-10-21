@@ -1,10 +1,10 @@
 {
   "name": "apphook",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A way to implant/modify other piece of code",
   "main": "./dist/index.js",
-  "files": ["./dist"],
   "types": "./types/index.d.ts",
+  "files": ["./dist", "./types"],
   "scripts": {
     "build": "tsc",
     "test": "jest --coverage tests"
