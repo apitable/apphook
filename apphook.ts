@@ -34,7 +34,7 @@ export class AppHook {
    * @type {AddTriggerEvent}
    * @memberof AppHook
    */
-  _onAddTrigger: AddTriggerEvent;
+  _onAddTrigger: AddTriggerEvent | undefined;
 
   /**
    * When DoTrigger triggered, the inner event.
@@ -42,7 +42,7 @@ export class AppHook {
    * @type {DoTriggerEvent}
    * @memberof AppHook
    */
-  _onDoTrigger: DoTriggerEvent;
+  _onDoTrigger: DoTriggerEvent | undefined;
 
   /**
    * Use for inner self-inspection, 
@@ -51,7 +51,7 @@ export class AppHook {
    * @type {UseFiltersEvent}
    * @memberof AppHook
    */
-  _onUseFilters: UseFiltersEvent;
+  _onUseFilters: UseFiltersEvent | undefined;
 
   /**
    * When AddFilter triggered, the inner event. 
@@ -59,7 +59,7 @@ export class AppHook {
    * @type {AddFilterEvent}
    * @memberof AppHook
    */
-  _onAddFilter: AddFilterEvent;
+  _onAddFilter: AddFilterEvent | undefined;
 
   /**
    *
