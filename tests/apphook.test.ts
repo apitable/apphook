@@ -6,7 +6,7 @@
  * @Last Modified by: Kelly Peilin Chan (kelly@apitable.com)
  * @Last Modified time: 2022-10-19 14:26:00
  */
-import { IFilter, ICondition, IRule, ITrigger, AppHook } from '..';
+import { IFilter, ICondition, IRule, ITrigger, AppHook } from '../src';
 
 class TestCondition implements ICondition {
   doCheck(): boolean {

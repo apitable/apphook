@@ -7,8 +7,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true, 
     "outDir":"dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "./types"
   },
+  "include": ["src/**/*"],
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended"
 }

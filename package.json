@@ -1,11 +1,12 @@
 {
   "name": "apphook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A way to implant/modify other piece of code",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./types/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest --coverage"
+    "test": "jest --coverage tests"
   },
   "repository": {
     "type": "git",
@@ -14,8 +15,7 @@
   "keywords": [
     "hook",
     "plugin",
-    "event",
-    "subcribe"
+    "event"
   ],
   "author": "Kelly Peilin Chan <kelly@apitable.com>",
   "license": "MIT",
