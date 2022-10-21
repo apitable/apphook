@@ -14,6 +14,14 @@ That's why we should know `AppHook`.
 
 `AppHook` is a hooks engine which Event-Driven. It can intercept users' behaviors and extend our functionalities.
 
+## Quick Start
+
+```bash
+npm i --save apphook
+```
+
+See [examples](#example) for more
+
 ## Principle
 
 We place AppHook hooks in code and trigger event.
