@@ -55,6 +55,16 @@ describe('test appHook', () => {
     //     true);
     // apphook.doTriggers('test_error_event', 321);
   });
+  // it('should call trigger event ok (async)', async () => {
+    // const apphook = new AppHook();
+    // async filter
+    // const filter1: IFilter = apphook.addFilterAsync('test',
+      // defaultValue => (defaultValue + ' Filtered1'),
+      // []);
+    // expect(filter1.hook).toBe('test');
+    // async action
+
+  // });
 
   it('should call filter event ok', () => {
     const apphook = new AppHook();

@@ -10,7 +10,7 @@ import { FilterCommand, TriggerCommand } from './commands';
 import { IRule } from './rules';
 import { IFilterAction, ITriggerAction } from './actions';
 import { IListener, ITrigger, ListenerType as ListenerType, IFilter } from './listeners';
-import { AddTriggerEvent, DoTriggerEvent, UseFiltersEvent, AddFilterEvent } from './hook_events';
+import { AddTriggerEvent, DoTriggerEvent, WhenApplyFiltersEvent, AddFilterEvent } from './hook_events';
 
 interface IListenersMap {
   [listenerType: string]: {
@@ -48,10 +48,10 @@ export class AppHook {
    * Use for inner self-inspection, 
    * the event action that can be bound to useFilters
    *
-   * @type {UseFiltersEvent}
+   * @type {WhenApplyFiltersEvent}
    * @memberof AppHook
    */
-  _onUseFilters: UseFiltersEvent | undefined;
+  _whenApplyFilters: WhenApplyFiltersEvent | undefined;
 
   /**
    * When AddFilter triggered, the inner event. 
@@ -60,6 +60,11 @@ export class AppHook {
    * @memberof AppHook
    */
   _onAddFilter: AddFilterEvent | undefined;
+
+  // async applyFiltersAsync<T>(hook: string, defaultValue: any, hookState?: any): Promise<T> {
+
+  //     return await ;
+  // }
 
   /**
    *
@@ -135,11 +140,11 @@ export class AppHook {
   /**
    * binding the method will be called when applyFilters
    *
-   * @param {UseFiltersEvent} bind
+   * @param {WhenApplyFiltersEvent} bind
    * @memberof AppHook
    */
-  bindUseFilters(bind: UseFiltersEvent) {
-    this._onUseFilters = bind;
+  bindUseFilters(bind: WhenApplyFiltersEvent) {
+    this._whenApplyFilters = bind;
   }
 
   /**
@@ -371,8 +376,8 @@ export class AppHook {
    * @memberof AppHook
    */
   applyFilters(hook: string, defaultValue: any, hookState?: any): any {
-    if (this._onUseFilters != null) {
-      this._onUseFilters(hook, defaultValue, hookState);
+    if (this._whenApplyFilters != null) {
+      this._whenApplyFilters(hook, defaultValue, hookState);
     }
 
     const filterMap = this._listeners[ListenerType.Filter];

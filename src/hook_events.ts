@@ -25,4 +25,7 @@ export type AddFilterEvent = (hook: string,
 
 export type DoTriggerEvent = (hook: string, hookState?: any) => void;
 
-export type UseFiltersEvent = (hook: string, defaultValue: any, hookState?: any) => void;
+/**
+ * the event that will be triggered when use applyFilters
+ */
+export type WhenApplyFiltersEvent = (hook: string, defaultValue: any, hookState?: any) => void;
