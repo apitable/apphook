@@ -104,7 +104,7 @@ export class AppHook {
       isCatch,
     };
 
-    this.addListner(ListenerType.Trigger, hook, trigger);
+    this.addListener(ListenerType.Trigger, hook, trigger);
     return trigger;
   }
 
@@ -185,7 +185,7 @@ export class AppHook {
       isCatch,
     };
 
-    this.addListner(ListenerType.Filter, hook, filter);
+    this.addListener(ListenerType.Filter, hook, filter);
 
     return filter;
   }
@@ -199,7 +199,7 @@ export class AppHook {
    * @param {IListener} newListener 
    * @memberof AppHook
    */
-  private addListner(type: ListenerType, hook: string, newListener: IListener) {
+  private addListener(type: ListenerType, hook: string, newListener: IListener) {
     // listeners of the type
     let typeListners = this._listeners[type];
     if (typeListners === undefined) {
@@ -245,7 +245,7 @@ export class AppHook {
     const listenerList = typeListners[listener.hook];
     if (listenerList === undefined) {
       return false;
-    } 
+    }
     for (let i = 0; i < listenerList.length; i++) {
       const l = listenerList[i];
       if (l === listener) {
@@ -388,20 +388,20 @@ export class AppHook {
     if (filterList === undefined) {
       return defaultValue;
     }
-    let filterdValue = defaultValue;
+    let filteredValue = defaultValue;
     for (let i = 0; i < filterList.length; i++) {
       const filter = filterList[i] as IFilter;
       if (filter.isCatch === undefined || filter.isCatch === false) {
-        filterdValue = filter.action.command(filterdValue, hookState, filter.action.args);
+        filteredValue = filter.action.command(filteredValue, hookState, filter.action.args);
       } else {
         try {
-          filterdValue = filter.action.command(filterdValue, hookState, filter.action.args);
+          filteredValue = filter.action.command(filteredValue, hookState, filter.action.args);
         } catch (e) {
           console.error(e);
         }
       }
     }
-    return filterdValue;
+    return filteredValue;
   }
 
 }

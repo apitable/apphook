@@ -10,18 +10,18 @@ import { FilterCommand, TriggerCommand } from './commands';
 import { IRule } from './rules';
 
 export type AddTriggerEvent = (hook: string,
-                               command: TriggerCommand,
-                               commandArg: any,
-                               rule: IRule | undefined,
-                               priority: number,
-                               isCatch: boolean) => void;
+    command: TriggerCommand,
+    commandArg: any,
+    rule: IRule | undefined,
+    priority: number,
+    isCatch: boolean) => void;
 
 export type AddFilterEvent = (hook: string,
-                              command: FilterCommand,
-                              commandArg: any,
-                              rule: IRule | undefined,
-                              priority: number,
-                              isCatch: boolean) => void;
+    command: FilterCommand,
+    commandArg: any,
+    rule: IRule | undefined,
+    priority: number,
+    isCatch: boolean) => void;
 
 export type DoTriggerEvent = (hook: string, hookState?: any) => void;
 
