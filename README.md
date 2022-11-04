@@ -1,7 +1,7 @@
 # apphook: Event-Manager Hook Engine 
 
 [![npm](https://img.shields.io/npm/v/apphook)](https://www.npmjs.com/package/apphook)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mr-kelly/apphook/npm-publish)](https://github.com/mr-kelly/apphook/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/apitable/apphook/npm-publish)](https://github.com/apitable/apphook/actions)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/apphook)](https://www.npmjs.com/package/apphook)
 [![npm](https://img.shields.io/npm/dm/apphook)](https://www.npmjs.com/package/apphook)
 
