@@ -263,19 +263,19 @@ export class AppHook {
    * active the trigger, map the trigger to the command
    * no need to consider the priority, because the priority is considered when add trigger
    *
-   * @param {string} hook
+   * @param {string} hookName hook event name
    * @param {object} [hookState={}] hook event state, optional arguments 
    * @memberof AppHook
    */
-  doTriggers(hook: string, hookState?: any) {
+  doTriggers(hookName: string, hookState?: any) {
     if (this._onDoTrigger != null) {
-      this._onDoTrigger(hook, hookState);
+      this._onDoTrigger(hookName, hookState);
     }
     const triggerMap = this._listeners[ListenerType.Trigger];
     if (triggerMap === undefined) {
       return;
     }
-    const triggerList = triggerMap[hook];
+    const triggerList = triggerMap[hookName];
     if (triggerList === undefined) {
       return;
     }
@@ -316,7 +316,7 @@ export class AppHook {
    * @memberof AppHook
    */
   hasAnyTriggers(hook: string): boolean {
-    return this.hasAnyListeners(ListenerType.Trigger, hook);
+    return this.countAnyListeners(ListenerType.Trigger, hook) > 0;
   }
 
   /**
@@ -327,7 +327,17 @@ export class AppHook {
    * @memberof AppHook
    */
   hasAnyFilters(hook: string): boolean {
-    return this.hasAnyListeners(ListenerType.Filter, hook);
+    return this.countAnyListeners(ListenerType.Filter, hook) > 0;
+  }
+
+  /**
+   * How many triggers?
+   * 
+   * @param hook 
+   * @returns 
+   */
+  countAnyTrigger(hook: string): number {
+    return this.countAnyListeners(ListenerType.Trigger, hook);
   }
 
   /**
@@ -339,19 +349,16 @@ export class AppHook {
    * @returns {boolean}
    * @memberof AppHook
    */
-  private hasAnyListeners(type: ListenerType, hook: string): boolean {
+  private countAnyListeners(type: ListenerType, hook: string): number{
     const typeListeners = this._listeners[type];
     if (typeListeners === undefined) {
-      return false;
+      return 0;
     }
     const hookListeners = typeListeners[hook];
     if (hookListeners === undefined) {
-      return false;
+      return 0;
     }
-    if (hookListeners.length === 0) {
-      return false;
-    }
-    return true;
+    return hookListeners.length;
   }
 
   /**

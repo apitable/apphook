@@ -6,7 +6,14 @@
  * @Last Modified by: Kelly Peilin Chan (kelly@apitable.com)
  * @Last Modified time: 2022-10-19 14:26:00
  */
-import { IFilter, ICondition, IRule, ITrigger, AppHook, AddTrigger } from "../src";
+import {
+  IFilter,
+  ICondition,
+  IRule,
+  ITrigger,
+  AppHook,
+  AddTrigger,
+} from "../src";
 
 class TestCondition implements ICondition {
   doCheck(): boolean {
@@ -126,25 +133,32 @@ describe("test appHook", () => {
   });
 });
 
-
-
-class TestClass {
-  // @AddTrigger(new AppHook(), "test")
-  // testTriggerFunction() {
-
-  // }
-  @AddTrigger(new AppHook(), "test_trigger_decorator_event")
-  testTriggerFunction(hookState: any, args: any[]) {
-    expect(hookState).toBe(123);
-  }
-}
-
 describe("test appHook decorators", () => {
   it("should call trigger event ok", () => {
     const apphook = new AppHook();
+    let triggerResult = false;
+
+    class TestClass {
+      @AddTrigger(apphook, "test_trigger_decorator_event")
+      testTriggerFunction(hookState: any, args: any[]) {
+        expect(hookState).toBe(678);
+        expect(this).not.toBeNull();
+        triggerResult = true;
+      }
+    }
+
+    apphook.doTriggers("test_trigger_decorator_event", 678);
+
+    // again, run double time
+    triggerResult = false;
+    expect(triggerResult).toBe(false);
+    apphook.doTriggers("test_trigger_decorator_event", 678);
+
+    expect(triggerResult.toString()).toBe("true");
 
 
-    apphook.doTriggers("test_trigger_decorator_event", 321);
-
+    // ensure once trigger added
+    const triggersCount = apphook.countAnyTrigger("test_trigger_decorator_event");
+    expect(triggersCount).toBe(1);
   });
 });
