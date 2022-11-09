@@ -6,7 +6,7 @@
  * @Last Modified by: Kelly Peilin Chan (kelly@apitable.com)
  * @Last Modified time: 2022-10-19 14:26:00
  */
-import { IFilter, ICondition, IRule, ITrigger, AppHook } from '../src';
+import { IFilter, ICondition, IRule, ITrigger, AppHook, AddTrigger } from "../src";
 
 class TestCondition implements ICondition {
   doCheck(): boolean {
@@ -14,11 +14,11 @@ class TestCondition implements ICondition {
   }
 }
 
-describe('test appHook', () => {
-  it('should call trigger event ok', () => {
+describe("test appHook", () => {
+  it("should call trigger event ok", () => {
     const apphook = new AppHook();
 
-    expect(apphook.hasAnyTriggers('test_trigger_event')).toBe(false);
+    expect(apphook.hasAnyTriggers("test_trigger_event")).toBe(false);
 
     const rule: IRule = {
       condition: new TestCondition(),
@@ -28,20 +28,21 @@ describe('test appHook', () => {
     let triggerResult = false;
 
     const trigger: ITrigger = apphook.addTrigger(
-      'test_trigger_event',
+      "test_trigger_event",
       (hookState, _args) => {
         expect(hookState).toBe(123);
         triggerResult = true;
       },
       [],
-      rule);
+      rule
+    );
 
-    expect(apphook.hasAnyTriggers('test_trigger_event')).toBe(true);
+    expect(apphook.hasAnyTriggers("test_trigger_event")).toBe(true);
 
-    apphook.doTriggers('test_trigger_event', 123);
+    apphook.doTriggers("test_trigger_event", 123);
 
-    expect(triggerResult.toString()).toBe('true');
-    expect(trigger.hook).toBe('test_trigger_event');
+    expect(triggerResult.toString()).toBe("true");
+    expect(trigger.hook).toBe("test_trigger_event");
 
     // test catch erro (red error)
     // apphook.addTrigger(
@@ -56,20 +57,20 @@ describe('test appHook', () => {
     // apphook.doTriggers('test_error_event', 321);
   });
   // it('should call trigger event ok (async)', async () => {
-    // const apphook = new AppHook();
-    // async filter
-    // const filter1: IFilter = apphook.addFilterAsync('test',
-      // defaultValue => (defaultValue + ' Filtered1'),
-      // []);
-    // expect(filter1.hook).toBe('test');
-    // async action
+  // const apphook = new AppHook();
+  // async filter
+  // const filter1: IFilter = apphook.addFilterAsync('test',
+  // defaultValue => (defaultValue + ' Filtered1'),
+  // []);
+  // expect(filter1.hook).toBe('test');
+  // async action
 
   // });
 
-  it('should call filter event ok', () => {
+  it("should call filter event ok", () => {
     const apphook = new AppHook();
 
-    expect(apphook.hasAnyFilters('get_test_name')).toBe(false);
+    expect(apphook.hasAnyFilters("get_test_name")).toBe(false);
 
     const rule: IRule = {
       condition: {
@@ -79,41 +80,71 @@ describe('test appHook', () => {
     };
 
     // Single layer filter
-    const filter1: IFilter = apphook.addFilter('get_test_name',
-      defaultValue => (defaultValue + ' Filtered1'),
+    const filter1: IFilter = apphook.addFilter(
+      "get_test_name",
+      (defaultValue) => defaultValue + " Filtered1",
       [],
-      rule);
-    expect(filter1.hook).toBe('get_test_name');
+      rule
+    );
+    expect(filter1.hook).toBe("get_test_name");
 
-    const filterd1 = apphook.applyFilters('get_test_name', 'Test Name');
-    expect(filterd1).toBe('Test Name Filtered1');
+    const filterd1 = apphook.applyFilters("get_test_name", "Test Name");
+    expect(filterd1).toBe("Test Name Filtered1");
 
     // Double layer filter
-    const filter2: IFilter = apphook.addFilter('get_test_name',
-      defaultValue => (defaultValue + ' Filtered2'),
+    const filter2: IFilter = apphook.addFilter(
+      "get_test_name",
+      (defaultValue) => defaultValue + " Filtered2",
       [],
-      rule);
-    expect(filter2.hook).toBe('get_test_name');
+      rule
+    );
+    expect(filter2.hook).toBe("get_test_name");
 
-    const filterd2 = apphook.applyFilters('get_test_name', 'Test Name');
-    expect(filterd2).toBe('Test Name Filtered2 Filtered1');
+    const filterd2 = apphook.applyFilters("get_test_name", "Test Name");
+    expect(filterd2).toBe("Test Name Filtered2 Filtered1");
 
     // third layer filter
-    const filter3: IFilter = apphook.addFilter('get_test_name',
-      defaultValue => (defaultValue + ' Filtered3'),
+    const filter3: IFilter = apphook.addFilter(
+      "get_test_name",
+      (defaultValue) => defaultValue + " Filtered3",
       [],
-      rule, 999);
-    expect(filter3.hook).toBe('get_test_name');
+      rule,
+      999
+    );
+    expect(filter3.hook).toBe("get_test_name");
 
-    const filterd3 = apphook.applyFilters('get_test_name', 'Test Name');
-    expect(filterd3).toBe('Test Name Filtered2 Filtered1 Filtered3');
+    const filterd3 = apphook.applyFilters("get_test_name", "Test Name");
+    expect(filterd3).toBe("Test Name Filtered2 Filtered1 Filtered3");
 
     // delete filter
     apphook.removeFilter(filter1);
 
-    const filterd4 = apphook.applyFilters('get_test_name', 'Test Name');
-    expect(filterd4).toBe('Test Name Filtered2 Filtered3');
+    const filterd4 = apphook.applyFilters("get_test_name", "Test Name");
+    expect(filterd4).toBe("Test Name Filtered2 Filtered3");
 
-    expect(apphook.hasAnyFilters('get_test_name')).toBe(true);
+    expect(apphook.hasAnyFilters("get_test_name")).toBe(true);
+  });
+});
+
+
+
+class TestClass {
+  // @AddTrigger(new AppHook(), "test")
+  // testTriggerFunction() {
+
+  // }
+  @AddTrigger(new AppHook(), "test_trigger_decorator_event")
+  testTriggerFunction(hookState: any, args: any[]) {
+    expect(hookState).toBe(123);
+  }
+}
+
+describe("test appHook decorators", () => {
+  it("should call trigger event ok", () => {
+    const apphook = new AppHook();
+
+
+    apphook.doTriggers("test_trigger_decorator_event", 321);
+
   });
 });
