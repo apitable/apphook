@@ -137,9 +137,10 @@ describe("test appHook decorators", () => {
   it("should call trigger event ok", () => {
     const apphook = new AppHook();
     let triggerResult = false;
+    const hookName = "test_trigger_decorator_event";
 
     class TestClass {
-      @WhenTrigger(apphook, "test_trigger_decorator_event")
+      @WhenTrigger(apphook, hookName)
       testTriggerFunction(hookState: any, args: any[]) {
         expect(hookState).toBe(678);
         expect(this).not.toBeNull();
@@ -147,18 +148,18 @@ describe("test appHook decorators", () => {
       }
     }
 
-    apphook.doTriggers("test_trigger_decorator_event", 678);
+    apphook.doTriggers(hookName, 678);
 
     // again, run double time
     triggerResult = false;
     expect(triggerResult).toBe(false);
-    apphook.doTriggers("test_trigger_decorator_event", 678);
+    apphook.doTriggers(hookName, 678);
 
     expect(triggerResult.toString()).toBe("true");
 
 
     // ensure once trigger added
-    const triggersCount = apphook.countAnyTrigger("test_trigger_decorator_event");
+    const triggersCount = apphook.countAnyTrigger(hookName);
     expect(triggersCount).toBe(1);
   });
 });
