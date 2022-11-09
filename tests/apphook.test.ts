@@ -12,7 +12,7 @@ import {
   IRule,
   ITrigger,
   AppHook,
-  AddTrigger,
+  WhenTrigger,
 } from "../src";
 
 class TestCondition implements ICondition {
@@ -139,7 +139,7 @@ describe("test appHook decorators", () => {
     let triggerResult = false;
 
     class TestClass {
-      @AddTrigger(apphook, "test_trigger_decorator_event")
+      @WhenTrigger(apphook, "test_trigger_decorator_event")
       testTriggerFunction(hookState: any, args: any[]) {
         expect(hookState).toBe(678);
         expect(this).not.toBeNull();
