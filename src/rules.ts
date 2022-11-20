@@ -4,6 +4,10 @@ export interface IRule {
     args: any[];
 }
 
-export interface ICondition {
+export type ICondition = IConditionFunction | IConditionClass;
+
+export type IConditionFunction = () => boolean;
+
+export interface IConditionClass {
     doCheck(): boolean;
 }

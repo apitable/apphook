@@ -6,10 +6,10 @@
  * @Last Modified by: Kelly Peilin Chan (kelly@apitable.com)
  * @Last Modified time: 2020-03-21 18:25:48
  */
-import { FilterCommand, TriggerCommand } from './commands';
+import { AsyncFilterCommand, FilterCommand, TriggerCommand } from './commands';
 import { IRule } from './rules';
-import { IFilterAction, ITriggerAction } from './actions';
-import { IListener, ITrigger, ListenerType as ListenerType, IFilter } from './listeners';
+import { IAsyncFilterAction, IFilterAction, ITriggerAction } from './actions';
+import { IListener, ITrigger, ListenerType as ListenerType, IFilter, IAsyncFilter } from './listeners';
 import { AddTriggerEvent, DoTriggerEvent, WhenApplyFiltersEvent, AddFilterEvent } from './hook_events';
 
 interface IListenersMap {
@@ -19,7 +19,10 @@ interface IListenersMap {
 }
 
 export class AppHook {
-
+  // async applyFiltersAsync<T>(hook: string, defaultValue: any, hookState?: any): Promise<T> {
+  //     return await ;
+  // }
+  
   /**
    * the place to store all listeners, including Trigger and Filter, store them by type
    *
@@ -192,6 +195,77 @@ export class AppHook {
     return filter;
   }
 
+  addFilterAsync<T>(hook: string,
+    command: AsyncFilterCommand<T>,
+    commandArg: any,
+    rule: IRule | undefined,
+    priority = 0,
+    isCatch = false): IAsyncFilter<T> {
+
+      if (this._onAddFilter != null) {
+        this._onAddFilter(hook, command, commandArg, rule, priority, isCatch);
+      }
+  
+      const action: IAsyncFilterAction<T> = {
+        command,
+        args: commandArg,
+      };
+  
+      const filter: IAsyncFilter<T> = {
+        type: ListenerType.Filter,
+        priority,
+        hook,
+        action,
+        rule,
+        isCatch,
+      };
+  
+      this.addListener(ListenerType.AsyncFilter, hook, filter);
+  
+      return filter;
+  }
+/**
+   *
+   * Add Trigger
+   *
+   * @param {string} hook
+   * @param {TriggerCommand} command
+   * @param {*} commandArg
+   * @param {(IRule | undefined)} rule
+   * @param {number} [priority=0]
+   * @param {boolean} [isCatch=false]
+   * @returns {ITrigger}
+   * @memberof AppHook
+   */
+async applyFiltersAsync<T>(hook: string, defaultValue: any, hookState?: any): Promise<T> {
+  // if (this._whenApplyFilters != null) {
+  //   this._whenApplyFilters(hook, defaultValue, hookState);
+  // }
+
+  const filterMap = this._listeners[ListenerType.AsyncFilter];
+  if (filterMap === undefined) {
+    return defaultValue;
+  }
+  const filterList = filterMap[hook];
+  if (filterList === undefined) {
+    return defaultValue;
+  }
+  let filteredValue = defaultValue;
+  for (let i = 0; i < filterList.length; i++) {
+    const filter = filterList[i] as IAsyncFilter<T>;
+    if (filter.isCatch === undefined || filter.isCatch === false) {
+      filteredValue = await filter.action.command(filteredValue, hookState, filter.action.args);
+    } else {
+      try {
+        filteredValue = await filter.action.command(filteredValue, hookState, filter.action.args);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+  return filteredValue;
+}
+
   /**
    * add listener to the listeners map
    *
@@ -330,6 +404,10 @@ export class AppHook {
     return this.countAnyListeners(ListenerType.Filter, hook) > 0;
   }
 
+  hasAnyAsyncFilters(hook: string): boolean {
+    return this.countAnyListeners(ListenerType.AsyncFilter, hook) > 0;
+  }
+
   /**
    * How many triggers?
    * 
@@ -375,6 +453,9 @@ export class AppHook {
     return this.removeListener(ListenerType.Filter, filter);
   }
 
+  removeFilterAsync<T>(filter: IAsyncFilter<T>) {
+    return this.removeListener(ListenerType.AsyncFilter, filter);
+  }
   /**
    * apply filters, trigger the event, and implement multiple filters on the original string
    *

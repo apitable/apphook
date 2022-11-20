@@ -7,7 +7,7 @@
  * @Last Modified by: Kelly Peilin Chan (kelly@apitable.com)
  * @Last Modified time: 2020-03-10 14:03:19
  */
-import { FilterCommand, TriggerCommand } from './commands';
+import { AsyncFilterCommand, FilterCommand, TriggerCommand } from './commands';
 
 export interface ITriggerAction {
     command: TriggerCommand;
@@ -15,5 +15,10 @@ export interface ITriggerAction {
 }
 export interface IFilterAction {
     command: FilterCommand;
+    args: any[];
+}
+
+export interface IAsyncFilterAction<T> {
+    command: AsyncFilterCommand<T>;
     args: any[];
 }

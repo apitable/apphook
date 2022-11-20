@@ -6,7 +6,7 @@
  * @Last Modified by: Kelly Peilin Chan (kelly@apitable.com)
  * @Last Modified time: 2020-03-19 14:22:02
  */
-import { FilterCommand, TriggerCommand } from './commands';
+import { AsyncFilterCommand, FilterCommand, TriggerCommand } from './commands';
 import { IRule } from './rules';
 
 export type AddTriggerEvent = (hook: string,
@@ -17,7 +17,7 @@ export type AddTriggerEvent = (hook: string,
     isCatch: boolean) => void;
 
 export type AddFilterEvent = (hook: string,
-    command: FilterCommand,
+    command: FilterCommand | AsyncFilterCommand<any>,
     commandArg: any,
     rule: IRule | undefined,
     priority: number,
