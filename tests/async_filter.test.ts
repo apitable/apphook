@@ -57,7 +57,7 @@ describe("test appHook async", () => {
         );
         expect(filter3.hook).toBe("get_test_name");
 
-        const filterd3 = await apphook.applyFiltersAsync("get_test_name", "Test Name");
+        const filterd3 = await apphook.applyFiltersAsync<string>("get_test_name", "Test Name");
         expect(filterd3).toBe("Test Name Filtered2 Filtered1 Filtered3");
 
         // delete filter
