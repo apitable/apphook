@@ -88,7 +88,7 @@ describe("test appHook", () => {
     };
 
     // Single layer filter
-    const filter1: IFilter = apphook.addFilter(
+    const filter1: IFilter<string> = apphook.addFilter<string>(
       "get_test_name",
       (defaultValue) => defaultValue + " Filtered1",
       [],
@@ -100,7 +100,7 @@ describe("test appHook", () => {
     expect(filterd1).toBe("Test Name Filtered1");
 
     // Double layer filter
-    const filter2: IFilter = apphook.addFilter(
+    const filter2: IFilter<any> = apphook.addFilter(
       "get_test_name",
       (defaultValue) => defaultValue + " Filtered2",
       [],
@@ -112,7 +112,7 @@ describe("test appHook", () => {
     expect(filterd2).toBe("Test Name Filtered2 Filtered1");
 
     // third layer filter
-    const filter3: IFilter = apphook.addFilter(
+    const filter3: IFilter<string> = apphook.addFilter(
       "get_test_name",
       (defaultValue) => defaultValue + " Filtered3",
       [],

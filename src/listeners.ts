@@ -22,8 +22,8 @@ export interface ITrigger extends IListener {
     action: ITriggerAction;
 }
 
-export interface IFilter extends IListener {
-    action: IFilterAction;
+export interface IFilter<T> extends IListener {
+    action: IFilterAction<T>;
 }
 export interface IAsyncFilter<T> extends IListener {
     action: IAsyncFilterAction<T>;

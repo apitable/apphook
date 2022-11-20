@@ -13,8 +13,8 @@ export interface ITriggerAction {
     command: TriggerCommand;
     args: any[];
 }
-export interface IFilterAction {
-    command: FilterCommand;
+export interface IFilterAction<T> {
+    command: FilterCommand<T>;
     args: any[];
 }
 

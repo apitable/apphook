@@ -35,7 +35,7 @@ describe("test appHook async", () => {
         expect(filterd1).toBe("Test Name Filtered1");
 
         // Double layer filter
-        const filter2: IFilter = apphook.addFilterAsync(
+        const filter2: IAsyncFilter<any> = apphook.addFilterAsync(
             "get_test_name",
             async (defaultValue) => defaultValue + " Filtered2",
             [],
@@ -43,11 +43,12 @@ describe("test appHook async", () => {
         );
         expect(filter2.hook).toBe("get_test_name");
 
+
         const filterd2 = await apphook.applyFiltersAsync<string>("get_test_name", "Test Name");
         expect(filterd2).toBe("Test Name Filtered2 Filtered1");
 
         // third layer filter
-        const filter3: IFilter = apphook.addFilterAsync(
+        const filter3: IAsyncFilter<string> = apphook.addFilterAsync(
             "get_test_name",
             async (defaultValue) => defaultValue + " Filtered3",
             [],

@@ -62,7 +62,7 @@ export class AppHook {
    * @type {AddFilterEvent}
    * @memberof AppHook
    */
-  _onAddFilter: AddFilterEvent | undefined;
+  _onAddFilter: AddFilterEvent<any> | undefined;
 
   // async applyFiltersAsync<T>(hook: string, defaultValue: any, hookState?: any): Promise<T> {
 
@@ -128,7 +128,7 @@ export class AppHook {
    * @param {AddFilterEvent} bind
    * @memberof AppHook
    */
-  bindAddFilter(bind: AddFilterEvent) {
+  bindAddFilter(bind: AddFilterEvent<any>) {
     this._onAddFilter = bind;
   }
 
@@ -165,23 +165,23 @@ export class AppHook {
    * @returns {IFilter}
    * @memberof AppHook
    */
-  addFilter(hook: string,
-    command: FilterCommand,
+  addFilter<T>(hook: string,
+    command: FilterCommand<T>,
     commandArg: any,
     rule: IRule | undefined,
     priority = 0,
-    isCatch = false): IFilter {
+    isCatch = false): IFilter<T> {
 
     if (this._onAddFilter != null) {
       this._onAddFilter(hook, command, commandArg, rule, priority, isCatch);
     }
 
-    const action: IFilterAction = {
+    const action: IFilterAction<T> = {
       command,
       args: commandArg,
     };
 
-    const filter: IFilter = {
+    const filter: IFilter<T> = {
       type: ListenerType.Filter,
       priority,
       hook,
@@ -449,7 +449,7 @@ async applyFiltersAsync<T>(hook: string, defaultValue: any, hookState?: any): Pr
    * @returns {boolean}
    * @memberof AppHook
    */
-  removeFilter(filter: IFilter): boolean {
+  removeFilter(filter: IFilter<any>): boolean {
     return this.removeListener(ListenerType.Filter, filter);
   }
 
@@ -480,7 +480,7 @@ async applyFiltersAsync<T>(hook: string, defaultValue: any, hookState?: any): Pr
     }
     let filteredValue = defaultValue;
     for (let i = 0; i < filterList.length; i++) {
-      const filter = filterList[i] as IFilter;
+      const filter = filterList[i] as IFilter<any>;
       if (filter.isCatch === undefined || filter.isCatch === false) {
         filteredValue = filter.action.command(filteredValue, hookState, filter.action.args);
       } else {

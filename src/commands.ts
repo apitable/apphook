@@ -11,5 +11,5 @@
 
 export type TriggerCommand = (hookState: any, args: any[]) => void;
 
-export type FilterCommand = (defaultValue: any, hookState: any, args: any[]) => any;
+export type FilterCommand<T> = (defaultValue: any, hookState: any, args: any[]) => T;
 export type AsyncFilterCommand<T> = (defaultValue: any, hookState: any, args: any[]) => Promise<T>;

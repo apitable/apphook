@@ -16,8 +16,8 @@ export type AddTriggerEvent = (hook: string,
     priority: number,
     isCatch: boolean) => void;
 
-export type AddFilterEvent = (hook: string,
-    command: FilterCommand | AsyncFilterCommand<any>,
+export type AddFilterEvent<T> = (hook: string,
+    command: FilterCommand<T> | AsyncFilterCommand<T>,
     commandArg: any,
     rule: IRule | undefined,
     priority: number,
