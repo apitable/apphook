@@ -118,7 +118,6 @@ apphook.addTrigger('user:click_login_button', (args) => {
 });
 ```
 
-
 ### Use Filter, make contact number nickname customizable
 
 ```typescript
@@ -139,6 +138,35 @@ apphook.addFilter('get_form_name', (defaultValue, args) => {
 // Here will get the result "Member ID" or "Employee ID" or "ID"
 ```
 
+### Async filters
+
+```typescript
+apphook.addFilterAsync('get_form_name', async (defaultValue, args) => {
+    let user = args[0];
+    if (user.is_cloud) {
+        return "Member ID";
+    } else if (user.is_self_hosted) {
+        return "Employee ID";
+    }
+    return defaultValue;
+});
+const res = await apphook.applyFilterAsync('get_form_name', 'ID');
+```
+
+### Decorators
+
+```typescript
+ const apphook = new AppHook();
+let triggerResult = false;
+  
+      class TestClass {
+        @WhenTrigger(apphook, "test")
+        testTriggerFunction(hookState: any, args: any[]) {
+        }
+      }
+  
+      apphook.doTriggers(hookName, 678);
+```
 ## Rookie popup guiding
 
 If you want: 
