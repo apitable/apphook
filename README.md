@@ -9,7 +9,7 @@
 
 `apphook` is a way to implant/modify other piece of code.
 
-It is a lightweight Event-Manager that inspired by [Wordpress Hooks](https://developer.wordpress.org/plugins/hooks/)
+It is a lightweight Event-Manager that is inspired by [Wordpress Hooks](https://developer.wordpress.org/plugins/hooks/)
 
 Computer software is a sort of sequence. We build software according to the business.
 
@@ -36,26 +36,26 @@ See [examples](#example) for usage examples.
 
 ## Principle
 
-We place AppHook hooks in code and trigger event.
+We place AppHook hooks in code and trigger events.
 
-For example, when user click the button A,  we can trigger a event called "click:button:A"
+For example, when a user clicks the button A, we can trigger an event called "click:button:A"
 
-We have two way to trigger event:
+We have two ways to trigger an event:
 
-1. Trigger. When event appear, do some actions or behaviors, it would not change code pipeline path.
-2. Filter. When event appear, it will do some actions and behaviors, return a object. It can be an interceptor.
+1. Trigger. When an event appears, do some actions or behaviors, it would not change the code pipeline path.
+2. Filter. When an event appears, it will do some actions and behaviors, and it will return a object. It can be an interceptor.
 
 
 ## Use Case
 
-- Event Tracking：Don't need to hard code in the code anymore, we can put all event tracking code in the file by bind and unbind.
+- Event Tracking：Don't need to hard code in the code anymore, we can put all the event tracking code in the file by binding and unbinding.
 - Rookie Onboarding: New register user onboarding
-- Help Guiding: when the 10th click on a button, popup a UI window.
-- Users Tasks: check whether user finished some tasks.
-- Marketing Events: If match some condition, do something like popup a marketing ui windows.
-- Users Recall: If user has not login 30 days, do something.
-- Payment Interception: When click a feature button, users have no payment yet, trigger and open a UI windows until payment finished and go on.
-- Third Party: customize 3rd plugins or more features
+- Help Guiding: on the 10th click on a button, popup a UI window.
+- Users Tasks: check whether the user has finished some tasks.
+- Marketing Events: If some condition is matched, do something like popup a marketing ui window.
+- Users Recall: If the user has not logged in for 30 days, do something.
+- Payment Interception: When a feature button is clicked, and users have no payment yet, trigger and open a UI window until the payment is finished and go on.
+- Third Party: customize 3rd party plugins or add more features
 - ......
 
 ## Terms
@@ -142,29 +142,29 @@ apphook.addFilter('get_form_name', (defaultValue, args) => {
 ## Rookie popup guiding
 
 If you want: 
-> When a female user get into your product the 10 times, popup "congratulation, you have used 10 times"
+> When a female user gets views a product for the 10th time, pop up "congratulations, you have viewed the product 10 times"
 
 Break it down:
 
-- trigger: user get into the 10th times
-    - hook: get into product(application:start)
-    - hookState: the 10th times
+- trigger: user views the product 10th times
+    - hook: view product(application:start)
+    - hookState: 10th time
     - rule: female
-        - condition: gender == femail
+        - condition: gender == female
     - action: 
         - command: popup
-        - command: "congratulation, you have used 10 times"
+        - command: "congratulations, you have viewed the product 10 times"
         
 
 Relevant code:
 ```typescript
 // trigger event
-apphook.doTrigger('application:start', [],  10) // the 10th times get in
+apphook.doTrigger('application:start', [],  10) // 10 is the number of times viewed
 
 // add trigger
 apphook.addTrigger('application:start', (args, hookState) => {
     if (hookState == 10) {
-        showWindow('congratulation, you have used 10 times');
+        showWindow('congratulations, you have viewed the product 10 times');
     }
 }, {
     doCheck: (args) => {
